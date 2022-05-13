@@ -8,28 +8,11 @@ import (
 	"strings"
 )
 
-func fizzBuzz(n int32) {
-	var i int32 = 1
-
-	for ; i <= n; i++ {
-		if i%3 == 0 && i%5 == 0 {
-			fmt.Println("FizzBuzz")
-		} else if i%3 == 0 {
-			fmt.Println("Fizz")
-		} else if i%5 == 0 {
-			fmt.Println("Buzz")
-		} else {
-			fmt.Println(i)
-		}
-	}
-
-}
-
 func main() {
 	input, err := getUserInput()
 
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("ERROR: %s\n", err)
 		return
 	}
 
@@ -39,13 +22,15 @@ func main() {
 func getUserInput() (int32, error) {
 	reader := bufio.NewReader(os.Stdin)
 
-	value, _, err := reader.ReadLine()
+	fmt.Print("Please enter a number: ")
+
+	input, _, err := reader.ReadLine()
 
 	if err != nil {
 		return 0, err
 	}
 
-	num, err := convertInputToInt(string(value))
+	num, err := convertInputToInt(string(input))
 
 	if err != nil {
 		return 0, err
@@ -64,4 +49,21 @@ func convertInputToInt(input string) (int32, error) {
 	}
 
 	return int32(num), nil
+}
+
+func fizzBuzz(n int32) {
+	var i int32 = 1
+
+	for ; i <= n; i++ {
+		if i%3 == 0 && i%5 == 0 {
+			fmt.Println("FizzBuzz")
+		} else if i%3 == 0 {
+			fmt.Println("Fizz")
+		} else if i%5 == 0 {
+			fmt.Println("Buzz")
+		} else {
+			fmt.Println(i)
+		}
+	}
+
 }
